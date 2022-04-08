@@ -9,18 +9,18 @@ import glob
 import pathlib
 import mlflow
 import os
-import matplotlib.pyplot as plt
 
-data_dir = pathlib.Path('Data/')
+data_dir = pathlib.Path('dvc-example-data/data')
 
 image_count = len(list(data_dir.glob('*/*.jpg')))
+print(image_count)
 
 batch_size = 10
 img_height = 180
 img_width = 180
 epochs_to_run = 3
 
-mlflow.set_tracking_uri('https://dagshub.com/jsprovoke/PigANoteOnDAGS.mlflow')
+mlflow.set_tracking_uri('https://dagshub.com/jsprovoke/dvc-example-data.mlflow')
 os.environ['MLFLOW_TRACKING_USERNAME']='jsprovoke' 
 os.environ['MLFLOW_TRACKING_PASSWORD']='2cf70b9982f050dcf6dd9dc04731a1d39fa48988'
 
@@ -91,8 +91,7 @@ plt.plot(epochs, val_acc, 'b', label='Validation acc')
 plt.title('Training and validation accuracy')
 plt.legend()
 
-fig1.savefig('junk.jpg', bbox_inches='tight', dpi=150)
-mlflow.log_figure(fig1, "figure1.jpg")
+fig1.savefig('dvc-example-data/output/figure1.jpg', bbox_inches='tight', dpi=150)
 
 fig2 = plt.figure()
 
@@ -101,8 +100,7 @@ plt.plot(epochs, val_loss, 'b', label='Validation loss')
 plt.title('Training and validation loss')
 plt.legend()
 
-fig2.savefig('line plot.jpg', bbox_inches='tight', dpi=150)
-mlflow.log_figure(fig2,"figure2.jpg")
+fig2.savefig('dvc-example-data/output/figure2.jpg', bbox_inches='tight', dpi=150)
 
 plt.show()
 

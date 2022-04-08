@@ -6,6 +6,14 @@ COPY . /tf
 
 WORKDIR /tf
 
-RUN chmod +x run_it_all.sh
+RUN apt-get update && \
+    pip install --upgrade pip \
+    pip --no-cache install \
+    mlflow --quiet \
+    matplotlib \
+    && apt-get install wget -y \
+    && wget https://dvc.org/deb/dvc.list -O /etc/apt/sources.list.d/dvc.list \
+    && apt-get update \
+    && apt-get install dvc -y
 
-ENTRYPOINT ["./run_it_all.sh"]
+ENTRYPOINT ["./runit.sh"]
